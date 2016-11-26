@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import fr.quentinklein.slt.LocationTracker;
+import fr.quentinklein.slt.TrackerSettings;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // You need to ask the user to enable the permissions
         } else {
-            tracker = new LocationTracker(this) {
+            tracker = new LocationTracker(this, new TrackerSettings()
+                    .setUseGPS(true)
+                    .setUseNetwork(true)
+                    .setUsePassive(true)
+                    .setTimeBetweenUpdates(500)) {
                 @Override
                 public void onLocationFound(Location location) {
                     Log.i(TAG, "Latitude: " + location.getLatitude());
