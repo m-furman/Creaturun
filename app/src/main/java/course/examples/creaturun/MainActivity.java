@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -62,8 +63,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //This is just temporary, you can change the layout or anything, just make sure there's still a way to get to GetCreatures
-    public void onGetCreatures(View view) {
+    /*public void onGetCreatures(View view) {
         Intent intent = new Intent(this, GetCreatures.class);
+        startActivity(intent);
+    }*/
+
+    // method for accessing the creature view screen
+    public void onViewCreatures(View view) {
+        Intent intent = new Intent(this, CreatureView.class);
         startActivity(intent);
     }
 }
