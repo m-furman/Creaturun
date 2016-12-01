@@ -23,7 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".CreatureView"></activity>
+=======
         <activity android:name=".GetCreatures"></activity>
+>>>>>>> 9877c2ebdf1eb46567c78c4341fa26a31a68574d
     </application>
 
 </manifest>

@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="horizontal"
-    tools:context="course.examples.creaturun.MainActivity">
+    tools:context="course.examples.creaturun.MainActivity"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -57,12 +58,21 @@
     </LinearLayout>
 
     <Button
+<<<<<<< HEAD
+        android:text="View Creatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewCreaturesButton"
+        android:layout_weight="0.35"
+        android:onClick="onViewCreatures"/>
+=======
         android:text="Get Creatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonGetCreatures"
         android:onClick="onGetCreatures"
         android:layout_weight="1" />
+>>>>>>> 9877c2ebdf1eb46567c78c4341fa26a31a68574d
 
 
 </LinearLayout>
