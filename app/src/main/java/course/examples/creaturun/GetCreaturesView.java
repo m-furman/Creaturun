@@ -150,7 +150,7 @@ public class GetCreaturesView extends RelativeLayout {
         invalidate();
     }
 
-    //laods a bitmap that is scaled down
+    //loads a bitmap that is scaled down
     private Bitmap loadScaledBitmap(int resource) {
         Drawable drawable = getResources().getDrawable(resource);
         Bitmap unscaled = ((BitmapDrawable) drawable).getBitmap();
