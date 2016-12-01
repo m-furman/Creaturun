@@ -8,71 +8,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="horizontal"
-    tools:context="course.examples.creaturun.MainActivity"
-    android:weightSum="1">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitude: " />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitude: " />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Speed: " />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Timestamp: " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/latitude"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/longitude"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/speed"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/timestamp"/>
-    </LinearLayout>
+    android:orientation="vertical"
+    tools:context="course.examples.creaturun.MainActivity">
 
     <Button
-<<<<<<< HEAD
+        android:text="Start Run!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/startRunButton"
+        android:onClick="onStartRun"/>
+
+    <Button
         android:text="View Creatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/viewCreaturesButton"
-        android:layout_weight="0.35"
         android:onClick="onViewCreatures"/>
-=======
-        android:text="Get Creatures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonGetCreatures"
-        android:onClick="onGetCreatures"
-        android:layout_weight="1" />
->>>>>>> 9877c2ebdf1eb46567c78c4341fa26a31a68574d
+
+    <Button
+    android:text="Get Creatures"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/buttonGetCreatures"
+    android:onClick="onGetCreatures" />
 
 
 </LinearLayout>
