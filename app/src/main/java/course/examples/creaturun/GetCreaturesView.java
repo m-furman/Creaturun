@@ -47,8 +47,11 @@ public class GetCreaturesView extends RelativeLayout {
     Point keyOffset = null;
     Point currentKeyPoint = null;
     //OPENING
-    Bitmap[] creatures = null;
     //OPENED
+    Creature[] creatures = null;
+    Rect[] creatureRects = null;
+    Bitmap[] creatureBitmaps = null;
+    int selectedCreature = -1;
 
     public GetCreaturesView(Context context) {
         super(context);
@@ -95,7 +98,7 @@ public class GetCreaturesView extends RelativeLayout {
                 for (int i = 0; i < creatures.length; i++) {
                     Point creaturePoint = new Point((int)(canvas.getWidth() * (i + .5f) / creatures.length),
                             (int)(canvas.getHeight() * creatureVerticalAlignment));
-                    drawBitmapCentered(canvas, creatures[i], creaturePoint);
+                    creatureRects[i] = drawBitmapCentered(canvas, creatureBitmaps[i], creaturePoint);
                 }
                 return;
         }
@@ -128,6 +131,19 @@ public class GetCreaturesView extends RelativeLayout {
                 invalidate();
                 return true;
             case OPENED:
+                for (int i = 0; i < creatures.length; i++) {
+                    if (insideMask(creatureBitmaps[i], creatureRects[i], new Point(touchX, touchY))) {
+                        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                            selectedCreature = i;
+                        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                            if (i == selectedCreature) {
+                                CreaturePopupWindow popup = new CreaturePopupWindow(creatures[i], context);
+                                popup.showPopup();
+                            }
+                            selectedCreature = -1;
+                        }
+                    }
+                }
                 return true;
             default:
                 return true;
@@ -136,9 +152,14 @@ public class GetCreaturesView extends RelativeLayout {
 
     private void startOpening() {
         //add some animation here instead of just setting it
-        animationState = AnimationState.OPENED;
         //add some generation of random creatures or something here
-        creatures = new Bitmap[] {loadScaledBitmap(R.drawable.pumpkin),loadScaledBitmap(R.drawable.sanic)};
+        creatures = new Creature[] {new Creature(Creature.CreatureType.CAT), new Creature(Creature.CreatureType.SANIC)};
+        creatureBitmaps = new Bitmap[creatures.length];
+        creatureRects = new Rect[creatures.length];
+        for (int i = 0; i < creatures.length; i++) {
+            creatureBitmaps[i] = loadScaledBitmap(creatures[i].getImageResource());
+        }
+
         Button button = new Button(context);
         button.setText("BACK TO MENU");
         button.setOnClickListener(new OnClickListener() {
@@ -149,6 +170,8 @@ public class GetCreaturesView extends RelativeLayout {
             }
         });
         addView(button);
+
+        animationState = AnimationState.OPENED;
         invalidate();
     }
 

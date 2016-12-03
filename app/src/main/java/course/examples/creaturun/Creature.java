@@ -1,5 +1,6 @@
 package course.examples.creaturun;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -37,9 +38,9 @@ public class Creature {
     private String name;
     private Date catchDate;
 
-    public Creature (CreatureType type, Date catchDate) {
+    public Creature (CreatureType type) {
         this.type = type;
-        this.catchDate = catchDate;
+        this.catchDate = new Date(System.currentTimeMillis());;
         this.name = names[this.type.ordinal()];
     }
 
@@ -49,6 +50,10 @@ public class Creature {
 
     public String getName() {
         return name;
+    }
+
+    public Date getCatchDate () {
+        return catchDate;
     }
 
     public int getImageResource() {
