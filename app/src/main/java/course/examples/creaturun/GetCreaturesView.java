@@ -1,6 +1,7 @@
 package course.examples.creaturun;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -143,7 +144,8 @@ public class GetCreaturesView extends RelativeLayout {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //doesn't do anything right now, add function to go back to menu
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
             }
         });
         addView(button);
