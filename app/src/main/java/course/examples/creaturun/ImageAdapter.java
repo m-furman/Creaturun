@@ -1,6 +1,10 @@
 package course.examples.creaturun;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -46,7 +50,9 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        Bitmap bitmap = ((BitmapDrawable)ContextCompat.getDrawable(mContext,mThumbIds[position])).getBitmap();
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+        imageView.setImageBitmap(scaled);
         return imageView;
     }
 
