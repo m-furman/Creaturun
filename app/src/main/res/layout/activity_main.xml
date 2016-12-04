@@ -9,12 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="#0D4F8B"
     tools:context="course.examples.creaturun.MainActivity">
+
+    <TextView
+        android:text="Creaturun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:textIsSelectable="false"
+        android:textSize="50sp"
+        />
 
     <Button
         android:text="Start Run!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/startRunButton"
         android:onClick="onStartRun"/>
 
@@ -22,15 +34,17 @@
         android:text="View Creatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:id="@+id/viewCreaturesButton"
         android:onClick="onViewCreatures"/>
 
     <Button
-    android:text="Get Creatures"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/buttonGetCreatures"
-    android:onClick="onGetCreatures" />
+        android:text="Get Creatures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/buttonGetCreatures"
+        android:onClick="onGetCreatures" />
 
 
 </LinearLayout>
