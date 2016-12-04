@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -9,42 +10,64 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="#0D4F8B"
+    android:background="#084F8B"
     tools:context="course.examples.creaturun.MainActivity">
 
     <TextView
         android:text="Creaturun"
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:id="@+id/textView"
         android:textIsSelectable="false"
         android:textSize="50sp"
         />
 
+    <ImageView
+        android:layout_width="106dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:tint="#ffffff"
+        app:srcCompat="@drawable/running_stick_figure"
+        android:id="@+id/imageView" />
+
     <Button
         android:text="Start Run!"
-        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:background="#FF1493"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
         android:id="@+id/startRunButton"
-        android:onClick="onStartRun"/>
+        android:onClick="onStartRun"
+        android:textSize="22sp" />
 
     <Button
         android:text="View Creatures"
-        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:background="#FF1493"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
         android:id="@+id/viewCreaturesButton"
-        android:onClick="onViewCreatures"/>
+        android:onClick="onViewCreatures"
+        android:textSize="22sp"/>
 
     <Button
         android:text="Get Creatures"
-        android:layout_width="wrap_content"
+        android:textColor="#ffffff"
+        android:background="#FF1493"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
         android:id="@+id/buttonGetCreatures"
-        android:onClick="onGetCreatures" />
+        android:onClick="onGetCreatures"
+        android:textSize="22sp"/>
 
 
 </LinearLayout>
