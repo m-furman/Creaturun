@@ -11,7 +11,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="#084F8B"
-    tools:context="course.examples.creaturun.MainActivity">
+    tools:context="course.examples.creaturun.MainActivity"
+    android:weightSum="1">
 
     <TextView
         android:text="Creaturun"
@@ -26,12 +27,13 @@
         />
 
     <ImageView
-        android:layout_width="106dp"
+        android:layout_width="168dp"
         android:layout_height="128dp"
         android:layout_gravity="center"
         android:tint="#ffffff"
         app:srcCompat="@drawable/running_stick_figure"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        android:layout_weight="0.60" />
 
     <Button
         android:text="Start Run!"
@@ -56,18 +58,5 @@
         android:id="@+id/viewCreaturesButton"
         android:onClick="onViewCreatures"
         android:textSize="22sp"/>
-
-    <Button
-        android:text="Get Creatures"
-        android:textColor="#ffffff"
-        android:background="#FF1493"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/buttonGetCreatures"
-        android:onClick="onGetCreatures"
-        android:textSize="22sp"/>
-
 
 </LinearLayout>
