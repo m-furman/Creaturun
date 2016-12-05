@@ -48,6 +48,7 @@ public class GetCreaturesView extends RelativeLayout {
     Point currentKeyPoint = null;
     //OPENING
     //OPENED
+    boolean bitmapsDrawn = false;
     Creature[] creatures = null;
     Rect[] creatureRects = null;
     Bitmap[] creatureBitmaps = null;
@@ -100,6 +101,7 @@ public class GetCreaturesView extends RelativeLayout {
                             (int)(canvas.getHeight() * creatureVerticalAlignment));
                     creatureRects[i] = drawBitmapCentered(canvas, creatureBitmaps[i], creaturePoint);
                 }
+                bitmapsDrawn = true;
                 return;
         }
     }
@@ -131,16 +133,18 @@ public class GetCreaturesView extends RelativeLayout {
                 invalidate();
                 return true;
             case OPENED:
-                for (int i = 0; i < creatures.length; i++) {
-                    if (insideMask(creatureBitmaps[i], creatureRects[i], new Point(touchX, touchY))) {
-                        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                            selectedCreature = i;
-                        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                            if (i == selectedCreature) {
-                                CreaturePopupWindow popup = new CreaturePopupWindow(creatures[i], context);
-                                popup.showPopup();
+                if (bitmapsDrawn) {
+                    for (int i = 0; i < creatures.length; i++) {
+                        if (insideMask(creatureBitmaps[i], creatureRects[i], new Point(touchX, touchY))) {
+                            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                                selectedCreature = i;
+                            } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                                if (i == selectedCreature) {
+                                    CreaturePopupWindow popup = new CreaturePopupWindow(creatures[i], context);
+                                    popup.showPopup();
+                                }
+                                selectedCreature = -1;
                             }
-                            selectedCreature = -1;
                         }
                     }
                 }
@@ -171,8 +175,8 @@ public class GetCreaturesView extends RelativeLayout {
         });
         addView(button);
 
-        animationState = AnimationState.OPENED;
         invalidate();
+        animationState = AnimationState.OPENED;
     }
 
     //loads a bitmap that is scaled down
