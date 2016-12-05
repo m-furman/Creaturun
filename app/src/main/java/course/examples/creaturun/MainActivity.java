@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Method that launches the running activity.
      */
     public void onStartRun(View view) {
-        Intent intent = new Intent(this, RunningActivity.class);
+        Intent intent = new Intent(this, RunningActivity2.class);
         startActivity(intent);
     }
 }
