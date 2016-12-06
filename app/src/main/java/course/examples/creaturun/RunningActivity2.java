@@ -89,6 +89,7 @@ public class RunningActivity2 extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();   // Hide the title bar
         setContentView(R.layout.activity_running2);
 
         distanceView = (TextView) findViewById(R.id.distanceView);
@@ -107,7 +108,7 @@ public class RunningActivity2 extends AppCompatActivity implements
                             @Override
                             public void run() {
                                 elapsedTime += 1000;
-                                timeView.setText("Elapsed time: " + getTimeText(elapsedTime));
+                                timeView.setText("Run time: " + getTimeText(elapsedTime));
 
                             }
                         });
@@ -179,8 +180,8 @@ public class RunningActivity2 extends AppCompatActivity implements
             currLocationMarker = mGoogleMap.addMarker(markerOptions);
             prevLocation = mLastLocation;
 
-            timeView.setText("Elapsed time: " + getTimeText(0));
-            distanceView.setText("Distance traveled: 0.0 miles");
+            timeView.setText("Run time: " + getTimeText(0));
+            distanceView.setText("Distance: 0.0 miles");
             speedView.setText("Speed: 0.0 miles/hour");
 
             startTime = mLastLocation.getTime();
@@ -245,7 +246,7 @@ public class RunningActivity2 extends AppCompatActivity implements
         speedArray.add(movementSpeed);
 
         prevTime = currTime;
-        distanceView.setText("Distance traveled: " + new DecimalFormat("#.##").format(distance * 0.000621371) + " miles");
+        distanceView.setText("Distance: " + new DecimalFormat("#.##").format(distance * 0.000621371) + " miles");
         speedView.setText("Speed: " + String.valueOf(new DecimalFormat("#.##").format(movementSpeed)) + " mph");
 
         // zoom to current position:
