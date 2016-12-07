@@ -9,13 +9,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:background="#283593"
     tools:context="course.examples.creaturun.RunningActivity2">
 
     <fragment
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.76"
         android:id="@+id/map"/>
 
     <LinearLayout
@@ -29,21 +30,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Speed: "
+                android:text="Speed: 0 mph"
+                android:textColor="#ffffff"
                 android:id="@+id/speedView"
                 android:textSize="20sp"/>
             <TextView
                 android:layout_width="124dp"
                 android:layout_height="wrap_content"
-                android:text="Run time:"
+                android:text="Run time: 0:00:00"
+                android:textColor="#ffffff"
                 android:id="@+id/timeView"
                 android:textSize="20sp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Distance:"
-                android:id="@+id/distanceView"
-                android:textSize="20sp"/>
+                android:text="Distance: 0 miles"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:id="@+id/distanceView"/>
         </LinearLayout>
 
         <Button
@@ -54,7 +58,7 @@
             android:layout_gravity="center"
             android:onClick="onClickEndRun"
             />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </LinearLayout>

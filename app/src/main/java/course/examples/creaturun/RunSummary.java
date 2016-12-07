@@ -24,6 +24,7 @@ public class RunSummary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();   // Hide the title bar
         setContentView(R.layout.activity_run_summary);
 
         mapView = (ImageView)findViewById(R.id.map_view);
