@@ -35,6 +35,10 @@ public class GetCreaturesView extends RelativeLayout {
     static int poofCount = 15;
     static float poofRadius = .4f;
     static float poofScale = 2.5f;
+    static long keyBouncePeriod = 5000;
+    static long keyBounceInterval = 1000;
+    static int keyBounces = 1;
+    static int keyBounceAmplitudePixels = 30;
 
     Context context;
     public enum AnimationState {
@@ -53,6 +57,7 @@ public class GetCreaturesView extends RelativeLayout {
     ///////////////////state variables for:
     //STATIC_CLOSED
     Rect keyRect = null;
+    float currentKeyBounceTime;
     //DRAGGING_CLOSED
     Point keyOffset = null;
     Point currentKeyPoint = null;
@@ -91,6 +96,9 @@ public class GetCreaturesView extends RelativeLayout {
         chestOpen = loadScaledBitmap(R.drawable.chestopen, 1);
         key = loadScaledBitmap(R.drawable.key, 1);
         poofs = new Bitmap[] {loadScaledBitmap(R.drawable.poof1, poofScale), loadScaledBitmap(R.drawable.poof2, poofScale)};
+
+        Timer timer = new Timer();
+        timer.schedule(new KeyBounceTimerTask(), 0, 1000 / frameRate);
     }
 
     @Override
@@ -99,12 +107,19 @@ public class GetCreaturesView extends RelativeLayout {
         switch (animationState) {
             case STATIC_CLOSED:
                 drawBitmapCentered(canvas, chestClosed, chestCenter, null);
-                Point keyCenter = new Point((int)(canvas.getWidth() / 2), (int)(keyVerticalAlignment * canvas.getHeight()));
+                float yOffset = 0;
+                if ((long)currentKeyBounceTime % keyBouncePeriod < keyBounceInterval) {
+                    yOffset = keyBounceAmplitudePixels *
+                            (float)Math.pow(Math.sin(currentKeyBounceTime * 2 * Math.PI / (keyBounceInterval / keyBounces)), 2);
+                }
+                Point keyCenter = new Point((int)(canvas.getWidth() / 2), (int)(keyVerticalAlignment * canvas.getHeight() + yOffset));
                 keyRect = drawBitmapCentered(canvas, key, keyCenter, null);
                 return;
             case DRAGGING_CLOSED:
                 drawBitmapCentered(canvas, chestClosed, chestCenter, null);
-                drawBitmapCentered(canvas, key, currentKeyPoint, null);
+                if (currentKeyPoint != null) {
+                    drawBitmapCentered(canvas, key, currentKeyPoint, null);
+                }
                 return;
             case OPENING:
                 drawBitmapCentered(canvas, chestOpen, chestCenter, null);
@@ -293,6 +308,30 @@ public class GetCreaturesView extends RelativeLayout {
                     invalidate();
                 }
             });
+        }
+    }
+
+    public class KeyBounceTimerTask extends TimerTask {
+        long startTime;
+
+        public KeyBounceTimerTask() {
+            startTime = System.currentTimeMillis();
+        }
+
+        @Override
+        public void run() {
+            if (animationState == AnimationState.OPENING || animationState == AnimationState.OPENED) {
+                cancel();
+            } else if (animationState == AnimationState.STATIC_CLOSED) {
+                currentKeyBounceTime = System.currentTimeMillis() - startTime;
+                GetCreaturesView.this.post(new Runnable () {
+
+                    @Override
+                    public void run() {
+                        invalidate();
+                    }
+                });
+            }
         }
     }
 }
