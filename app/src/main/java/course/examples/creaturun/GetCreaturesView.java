@@ -34,6 +34,7 @@ public class GetCreaturesView extends RelativeLayout {
     static long totalOpeningTime = 500;
     static int poofCount = 15;
     static float poofRadius = .4f;
+    static float poofScale = 2.5f;
 
     Context context;
     public enum AnimationState {
@@ -47,6 +48,7 @@ public class GetCreaturesView extends RelativeLayout {
     Bitmap chestClosed = null;
     Bitmap chestOpen = null;
     Bitmap key = null;
+    Bitmap[] poofs;
 
     ///////////////////state variables for:
     //STATIC_CLOSED
@@ -55,7 +57,7 @@ public class GetCreaturesView extends RelativeLayout {
     Point keyOffset = null;
     Point currentKeyPoint = null;
     //OPENING
-    Bitmap[] poofs;
+    int[] poofIndices;
     Point[] finalPoofPositions;
     float currentOpenTime;
     Paint alphaPaint = new Paint();
@@ -88,6 +90,7 @@ public class GetCreaturesView extends RelativeLayout {
         chestClosed = loadScaledBitmap(R.drawable.chestclosed, 1);
         chestOpen = loadScaledBitmap(R.drawable.chestopen, 1);
         key = loadScaledBitmap(R.drawable.key, 1);
+        poofs = new Bitmap[] {loadScaledBitmap(R.drawable.poof1, poofScale), loadScaledBitmap(R.drawable.poof2, poofScale)};
     }
 
     @Override
@@ -105,7 +108,7 @@ public class GetCreaturesView extends RelativeLayout {
                 return;
             case OPENING:
                 drawBitmapCentered(canvas, chestOpen, chestCenter, null);
-                if (poofs != null) {
+                if (poofIndices != null) {
                     float lerp = currentOpenTime / totalOpeningTime;
                     for (int i = 0; i < creatures.length; i++) {
                         Point creatureFinalPoint = new Point((int) (canvas.getWidth() * (i + .5f) / creatures.length),
@@ -118,10 +121,10 @@ public class GetCreaturesView extends RelativeLayout {
                     float easing = 2 * (float) Math.sqrt(currentOpenTime / totalOpeningTime);
                     int alpha = (int) (255f * (1 - Math.pow (2 * currentOpenTime / totalOpeningTime - 1, 2)));
                     alphaPaint.setAlpha(alpha);
-                    for (int i = 0; i < poofs.length; i++) {
+                    for (int i = 0; i < poofIndices.length; i++) {
                         Point centerPoint = new Point(chestCenter.x + (int) (finalPoofPositions[i].x * easing),
                                 chestCenter.y + (int) (finalPoofPositions[i].y * easing));
-                        drawBitmapCentered(canvas, poofs[i], centerPoint, alphaPaint);
+                        drawBitmapCentered(canvas, poofs[poofIndices[i]], centerPoint, alphaPaint);
                     }
                 }
                 return;
@@ -267,14 +270,15 @@ public class GetCreaturesView extends RelativeLayout {
             } else {
                 currentOpenTime = currentTime - startTime;
 
-                if (poofs == null) {
-                    poofs = new Bitmap[poofCount];
+                if (poofIndices == null) {
+//                    poofs = new Bitmap[poofCount];
                     finalPoofPositions = new Point[poofCount];
+                    poofIndices = new int[poofCount];
                     for (int i = 0; i < poofCount; i++) {
                         double r = Math.random();
-                        float size = 2f + (float)Math.random();
-                        if (r > .5f) poofs[i] = loadScaledBitmap(R.drawable.poof1, size);
-                        else poofs[i] = loadScaledBitmap(R.drawable.poof2, size);
+//                        float size = 2f + (float)Math.random();
+                        if (r > .5f) poofIndices[i] = 0;
+                        else poofIndices[i] = 1;
                         double radius = .75f + .25f * Math.random();
                         double angle = Math.random() * Math.PI * 2;
                         finalPoofPositions[i] = new Point((int)(radius * Math.cos(angle) * poofRadius * GetCreaturesView.this.getWidth()),
