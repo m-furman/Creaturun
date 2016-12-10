@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -16,6 +17,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Jon on 11/29/16.
  */
@@ -26,6 +30,10 @@ public class GetCreaturesView extends RelativeLayout {
     static float keyVerticalAlignment = .8f;
     static RectF keyUnlockZone = new RectF(.4f, .25f, .6f, .4f);
     static float creatureVerticalAlignment = .8f;
+    static int frameRate = 30;
+    static long totalOpeningTime = 500;
+    static int poofCount = 15;
+    static float poofRadius = .4f;
 
     Context context;
     public enum AnimationState {
@@ -47,6 +55,10 @@ public class GetCreaturesView extends RelativeLayout {
     Point keyOffset = null;
     Point currentKeyPoint = null;
     //OPENING
+    Bitmap[] poofs;
+    Point[] finalPoofPositions;
+    float currentOpenTime;
+    Paint alphaPaint = new Paint();
     //OPENED
     boolean bitmapsDrawn = false;
     Creature[] creatures = null;
@@ -73,9 +85,9 @@ public class GetCreaturesView extends RelativeLayout {
         this.context = context;
         invalidate();
         setWillNotDraw(false);
-        chestClosed = loadScaledBitmap(R.drawable.chestclosed);
-        chestOpen = loadScaledBitmap(R.drawable.chestopen);
-        key = loadScaledBitmap(R.drawable.key);
+        chestClosed = loadScaledBitmap(R.drawable.chestclosed, 1);
+        chestOpen = loadScaledBitmap(R.drawable.chestopen, 1);
+        key = loadScaledBitmap(R.drawable.key, 1);
     }
 
     @Override
@@ -83,23 +95,42 @@ public class GetCreaturesView extends RelativeLayout {
         Point chestCenter = new Point((int)(canvas.getWidth() / 2), (int)(chestVerticalAlignment * canvas.getHeight()));
         switch (animationState) {
             case STATIC_CLOSED:
-                drawBitmapCentered(canvas, chestClosed, chestCenter);
+                drawBitmapCentered(canvas, chestClosed, chestCenter, null);
                 Point keyCenter = new Point((int)(canvas.getWidth() / 2), (int)(keyVerticalAlignment * canvas.getHeight()));
-                keyRect = drawBitmapCentered(canvas, key, keyCenter);
+                keyRect = drawBitmapCentered(canvas, key, keyCenter, null);
                 return;
             case DRAGGING_CLOSED:
-                drawBitmapCentered(canvas, chestClosed, chestCenter);
-                drawBitmapCentered(canvas, key, currentKeyPoint);
+                drawBitmapCentered(canvas, chestClosed, chestCenter, null);
+                drawBitmapCentered(canvas, key, currentKeyPoint, null);
                 return;
             case OPENING:
-                //add animation here
+                drawBitmapCentered(canvas, chestOpen, chestCenter, null);
+                if (poofs != null) {
+                    float lerp = currentOpenTime / totalOpeningTime;
+                    for (int i = 0; i < creatures.length; i++) {
+                        Point creatureFinalPoint = new Point((int) (canvas.getWidth() * (i + .5f) / creatures.length),
+                                (int) (canvas.getHeight() * creatureVerticalAlignment));
+                        Point creaturePoint = new Point((int) (lerp * creatureFinalPoint.x + (1-lerp)*chestCenter.x),
+                                (int) (lerp * creatureFinalPoint.y + (1-lerp)*chestCenter.y));
+                        drawBitmapCentered(canvas, creatureBitmaps[i], creaturePoint, null);
+                    }
+
+                    float easing = 2 * (float) Math.sqrt(currentOpenTime / totalOpeningTime);
+                    int alpha = (int) (255f * (1 - Math.pow (2 * currentOpenTime / totalOpeningTime - 1, 2)));
+                    alphaPaint.setAlpha(alpha);
+                    for (int i = 0; i < poofs.length; i++) {
+                        Point centerPoint = new Point(chestCenter.x + (int) (finalPoofPositions[i].x * easing),
+                                chestCenter.y + (int) (finalPoofPositions[i].y * easing));
+                        drawBitmapCentered(canvas, poofs[i], centerPoint, alphaPaint);
+                    }
+                }
                 return;
             case OPENED:
-                drawBitmapCentered(canvas, chestOpen, chestCenter);
+                drawBitmapCentered(canvas, chestOpen, chestCenter, null);
                 for (int i = 0; i < creatures.length; i++) {
                     Point creaturePoint = new Point((int)(canvas.getWidth() * (i + .5f) / creatures.length),
                             (int)(canvas.getHeight() * creatureVerticalAlignment));
-                    creatureRects[i] = drawBitmapCentered(canvas, creatureBitmaps[i], creaturePoint);
+                    creatureRects[i] = drawBitmapCentered(canvas, creatureBitmaps[i], creaturePoint, null);
                 }
                 bitmapsDrawn = true;
                 return;
@@ -126,11 +157,12 @@ public class GetCreaturesView extends RelativeLayout {
                         startOpening();
                     } else {
                         currentKeyPoint = new Point(touchX - keyOffset.x, touchY - keyOffset.y);
+                        invalidate();
                     }
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     animationState = AnimationState.STATIC_CLOSED;
+                    invalidate();
                 }
-                invalidate();
                 return true;
             case OPENED:
                 if (bitmapsDrawn) {
@@ -154,16 +186,22 @@ public class GetCreaturesView extends RelativeLayout {
         }
     }
 
+    //starts opening animation
     private void startOpening() {
-        //add some animation here instead of just setting it
         //add some generation of random creatures or something here
         creatures = new Creature[] {new Creature(Creature.CreatureType.CAT), new Creature(Creature.CreatureType.SANIC)};
         creatureBitmaps = new Bitmap[creatures.length];
         creatureRects = new Rect[creatures.length];
         for (int i = 0; i < creatures.length; i++) {
-            creatureBitmaps[i] = loadScaledBitmap(creatures[i].getImageResource());
+            creatureBitmaps[i] = loadScaledBitmap(creatures[i].getImageResource(), 1);
         }
 
+        Timer timer = new Timer();
+        timer.schedule(new OpeningTimerTask(), 0, 1000 / frameRate);
+    }
+
+    //sets up for final state
+    private void fullOpen () {
         Button button = new Button(context);
         button.setText("BACK TO MENU");
         button.setOnClickListener(new OnClickListener() {
@@ -180,18 +218,18 @@ public class GetCreaturesView extends RelativeLayout {
     }
 
     //loads a bitmap that is scaled down
-    private Bitmap loadScaledBitmap(int resource) {
+    private Bitmap loadScaledBitmap(int resource, float rescale) {
         Drawable drawable = getResources().getDrawable(resource);
         Bitmap unscaled = ((BitmapDrawable) drawable).getBitmap();
-        return Bitmap.createScaledBitmap(unscaled, (int)(unscaled.getWidth()*scaleFactor),
-                (int)(unscaled.getHeight()*scaleFactor), true);
+        return Bitmap.createScaledBitmap(unscaled, (int)(unscaled.getWidth()*scaleFactor*rescale),
+                (int)(unscaled.getHeight()*scaleFactor*rescale), true);
     }
 
     //draws a bitmap centered at a point instead of from top left corner
-    private Rect drawBitmapCentered(Canvas canvas, Bitmap bitmap, Point center) {
+    private Rect drawBitmapCentered(Canvas canvas, Bitmap bitmap, Point center, Paint paint) {
         int left = center.x - bitmap.getWidth() / 2;
         int top = center.y - bitmap.getHeight() / 2;
-        canvas.drawBitmap(bitmap, left, top, null);
+        canvas.drawBitmap(bitmap, left, top, paint);
         return new Rect(left, top, left + bitmap.getWidth(), top + bitmap.getHeight());
     }
 
@@ -203,6 +241,54 @@ public class GetCreaturesView extends RelativeLayout {
             int inBitmapX = point.x - rect.left;
             int inBitmapY = point.y - rect.top;
             return Color.alpha(bitmap.getPixel(inBitmapX, inBitmapY)) > 0;
+        }
+    }
+
+    //opening animation handler timer task
+    public class OpeningTimerTask extends TimerTask {
+        long startTime;
+
+        public OpeningTimerTask () {
+            startTime = System.currentTimeMillis();
+        }
+
+        @Override
+        public void run() {
+            long currentTime = System.currentTimeMillis();
+
+            if (currentTime - startTime > totalOpeningTime) {
+                GetCreaturesView.this.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        fullOpen();
+                    }
+                });
+                cancel();
+            } else {
+                currentOpenTime = currentTime - startTime;
+
+                if (poofs == null) {
+                    poofs = new Bitmap[poofCount];
+                    finalPoofPositions = new Point[poofCount];
+                    for (int i = 0; i < poofCount; i++) {
+                        double r = Math.random();
+                        float size = 2f + (float)Math.random();
+                        if (r > .5f) poofs[i] = loadScaledBitmap(R.drawable.poof1, size);
+                        else poofs[i] = loadScaledBitmap(R.drawable.poof2, size);
+                        double radius = .75f + .25f * Math.random();
+                        double angle = Math.random() * Math.PI * 2;
+                        finalPoofPositions[i] = new Point((int)(radius * Math.cos(angle) * poofRadius * GetCreaturesView.this.getWidth()),
+                                (int)(radius * Math.sin(angle) * poofRadius * GetCreaturesView.this.getWidth()));
+                    }
+                }
+            }
+
+            GetCreaturesView.this.post(new Runnable () {
+                @Override
+                public void run() {
+                    invalidate();
+                }
+            });
         }
     }
 }
