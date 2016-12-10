@@ -1,6 +1,5 @@
 package course.examples.creaturun;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -14,7 +13,10 @@ public class Creature {
         FISH,
         PUMPKIN,
         SANIC,
-        SNAIL
+        SNAIL,
+        FLUFFY,
+        BLOO,
+        SLIME
     }
     private static int[] imageResources = new int[] {
             R.drawable.cat,
@@ -22,7 +24,10 @@ public class Creature {
             R.drawable.fish,
             R.drawable.pumpkin,
             R.drawable.sanic,
-            R.drawable.snail
+            R.drawable.snail,
+            R.drawable.brown_creature_centered,
+            R.drawable.blue_cat_thing,
+            R.drawable.weird_green_blob
     };
     //todo add more creative names
     private static String[] names = new String[] {
@@ -31,7 +36,10 @@ public class Creature {
             "Fish",
             "Pumpkin",
             "Sanic",
-            "Snail"
+            "Snail",
+            "Fluffy",
+            "Bloo",
+            "Slime"
     };
 
     private CreatureType type;

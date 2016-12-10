@@ -3,7 +3,6 @@ package course.examples.creaturun;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +62,9 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.pig,
             R.drawable.pumpkin,
             R.drawable.sanic,
-            R.drawable.snail
+            R.drawable.snail,
+            R.drawable.brown_creature_centered,
+            R.drawable.blue_cat_thing,
+            R.drawable.weird_green_blob
     };
 }

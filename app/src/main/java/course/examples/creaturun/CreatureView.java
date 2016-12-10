@@ -29,7 +29,10 @@ public class CreatureView extends AppCompatActivity {
                         new Creature(Creature.CreatureType.PIG),
                         new Creature(Creature.CreatureType.PUMPKIN),
                         new Creature(Creature.CreatureType.SANIC),
-                        new Creature(Creature.CreatureType.SNAIL)};
+                        new Creature(Creature.CreatureType.SNAIL),
+                        new Creature(Creature.CreatureType.FLUFFY),
+                        new Creature(Creature.CreatureType.BLOO),
+                        new Creature(Creature.CreatureType.SLIME)};
                 CreaturePopupWindow popup = new CreaturePopupWindow(creatures[position], rl.getContext());
                 popup.showPopup();
             }
