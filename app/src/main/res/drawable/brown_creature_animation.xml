@@ -4,17 +4,17 @@
 
     <item
         android:duration="300"
-        android:drawable="@drawable/frame_0_delay"/>
+        android:drawable="@drawable/running_creature_frame1"/>
 
     <item
         android:duration="300"
-        android:drawable="@drawable/frame_1_delay"/>
+        android:drawable="@drawable/running_creature_frame2"/>
 
     <item
         android:duration="300"
-        android:drawable="@drawable/frame_2_delay"/>
+        android:drawable="@drawable/running_creature_frame3"/>
 
     <item
         android:duration="300"
-        android:drawable="@drawable/frame_3_delay"/>
+        android:drawable="@drawable/running_creature_frame4"/>
 </animation-list>

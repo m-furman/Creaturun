@@ -63,8 +63,8 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.pumpkin,
             R.drawable.sanic,
             R.drawable.snail,
-            R.drawable.brown_creature_centered,
-            R.drawable.blue_cat_thing,
-            R.drawable.weird_green_blob
+            R.drawable.running_creature_square,
+            R.drawable.blue_cat_thing_square,
+            R.drawable.weird_green_blob_square
     };
 }
