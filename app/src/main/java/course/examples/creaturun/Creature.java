@@ -32,11 +32,11 @@ public class Creature {
     //todo add more creative names
     private static String[] names = new String[] {
             "Cat",
-            "Pig",
-            "Fish",
-            "Pumpkin",
-            "Sanic",
-            "Snail",
+            "Adynaton",
+            "Anglord",
+            "Jack",
+            "Hedgeheg",
+            "Snalien",
             "Fluffy",
             "Bloo",
             "Slime"

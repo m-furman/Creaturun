@@ -42,15 +42,15 @@ public class ImageAdapter extends BaseAdapter {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
             // below is where we set the size of the images to be loaded in
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+            imageView.setLayoutParams(new GridView.LayoutParams(230, 230));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(0, 0, 0, 0);
         } else {
             imageView = (ImageView) convertView;
         }
 
         Bitmap bitmap = ((BitmapDrawable)ContextCompat.getDrawable(mContext,mThumbIds[position])).getBitmap();
-        Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 280, 280, true);
         imageView.setImageBitmap(scaled);
         return imageView;
     }

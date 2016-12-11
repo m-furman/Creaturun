@@ -15,9 +15,13 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="341dp"
+        android:layout_height="0dp"
         android:id="@+id/map_view"
-        android:layout_weight="0.64" />
+        android:layout_weight="0.92" />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,12 +56,17 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Get Creatures!"
-        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:background="#FF1493"
+        android:layout_gravity="bottom"
         android:onClick="onClickGetCreatures"
         fontPath="fonts/Vanilla.ttf"
         />
