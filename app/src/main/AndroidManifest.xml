@@ -39,8 +39,6 @@
         </activity>
         <activity android:name=".CreatureView" />
         <activity android:name=".GetCreatures" />
-        <activity android:name=".RunningActivity" />
-        <activity android:name=".RunActivity" />
         <activity android:name=".RunningActivity2" />
         <activity android:name=".RunSummary"></activity>
     </application>

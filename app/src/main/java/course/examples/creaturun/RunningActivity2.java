@@ -157,7 +157,7 @@ public class RunningActivity2 extends AppCompatActivity implements
     }
 
     protected synchronized void buildGoogleApiClient() {
-        Toast.makeText(this, "buildGoogleApiClient", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "buildGoogleApiClient", Toast.LENGTH_SHORT).show();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -168,7 +168,7 @@ public class RunningActivity2 extends AppCompatActivity implements
     @Override
     @TargetApi(23)
     public void onConnected(Bundle bundle) {
-        Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "onConnected", Toast.LENGTH_SHORT).show();
         if (!(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},

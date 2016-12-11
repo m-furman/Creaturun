@@ -9,9 +9,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -220,8 +222,14 @@ public class GetCreaturesView extends RelativeLayout {
 
     //sets up for final state
     private void fullOpen () {
-        Button button = new Button(context);
-        button.setText("BACK TO MENU");
+        ContextThemeWrapper newContext = new ContextThemeWrapper(context, R.style.AppTheme);
+        Button button = new Button(newContext);
+        button.setText("MENU");
+        button.setBackgroundColor(Color.parseColor("#FF1493"));
+        button.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Vanilla.ttf"));
+        button.setTextColor(Color.WHITE);
+        button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -286,12 +294,10 @@ public class GetCreaturesView extends RelativeLayout {
                 currentOpenTime = currentTime - startTime;
 
                 if (poofIndices == null) {
-//                    poofs = new Bitmap[poofCount];
                     finalPoofPositions = new Point[poofCount];
                     poofIndices = new int[poofCount];
                     for (int i = 0; i < poofCount; i++) {
                         double r = Math.random();
-//                        float size = 2f + (float)Math.random();
                         if (r > .5f) poofIndices[i] = 0;
                         else poofIndices[i] = 1;
                         double radius = .75f + .25f * Math.random();
