@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,6 +93,8 @@ public class RunningActivity2 extends AppCompatActivity implements
     // only holds two locations at a time since we draw a line on the map whenever
     // we move from one point to another (no need to redraw everything)
 
+    boolean paused;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
@@ -115,14 +118,16 @@ public class RunningActivity2 extends AppCompatActivity implements
                 try {
                     while (!isInterrupted()) {
                         Thread.sleep(1000);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                elapsedTime += 1000;
-                                timeView.setText("Run time: " + getTimeText(elapsedTime));
+                        if (!paused) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    elapsedTime += 1000;
+                                    timeView.setText("Run time: " + getTimeText(elapsedTime));
 
-                            }
-                        });
+                                }
+                            });
+                        }
                     }
                 } catch (InterruptedException e) {
                 }
@@ -259,10 +264,10 @@ public class RunningActivity2 extends AppCompatActivity implements
 
         double distanceToLast = location.distanceTo(prevLocation);
         currTime = location.getTime();
-        distance += distanceToLast;
+        if (!paused) distance += distanceToLast;
         prevLocation = location;
         movementSpeed = distanceToLast / ((currTime - prevTime) * (Math.pow(2.77778, -7))); //conversion from milliseconds to hours
-        speedArray.add(movementSpeed);
+        if (!paused) speedArray.add(movementSpeed);
 
         prevTime = currTime;
         distanceView.setText("Distance: " + new DecimalFormat("#.##").format(distance * 0.000621371) + " miles");
@@ -301,6 +306,18 @@ public class RunningActivity2 extends AppCompatActivity implements
         timerThread.interrupt();
         stopLocationUpdates();
         mGoogleMap.snapshot(this);
+    }
+
+    //pause run
+    public void onClickPause(View v) {
+        paused = !paused;
+        Button pauseButton = (Button) findViewById(R.id.pauseButton);
+
+        if (paused) {
+            pauseButton.setText("Resume");
+        } else {
+            pauseButton.setText("Pause");
+        }
     }
 
     public double calculateAverageSpeed() {

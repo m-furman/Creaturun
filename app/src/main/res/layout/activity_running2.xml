@@ -56,16 +56,38 @@
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End run"
-            android:textColor="#ffffff"
-            android:background="#FF1493"
-            android:layout_gravity="center"
-            android:onClick="onClickEndRun"
-            fontPath="fonts/Vanilla.ttf"
-            />
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight=".45"
+                android:layout_height="wrap_content"
+                android:text="End run"
+                android:textColor="#ffffff"
+                android:background="#FF1493"
+                android:layout_gravity="center"
+                android:onClick="onClickEndRun"
+                fontPath="fonts/Vanilla.ttf"
+                />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"/>
+            <Button
+                android:id="@+id/pauseButton"
+                android:layout_width="0dp"
+                android:layout_weight=".45"
+                android:layout_height="wrap_content"
+                android:text="Pause"
+                android:textColor="#ffffff"
+                android:background="#FF1493"
+                android:layout_gravity="center"
+                android:onClick="onClickPause"
+                fontPath="fonts/Vanilla.ttf"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
