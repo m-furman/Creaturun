@@ -2,6 +2,7 @@ package course.examples.creaturun;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -36,6 +37,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static course.examples.creaturun.R.id.map;
 
@@ -88,6 +91,11 @@ public class RunningActivity2 extends AppCompatActivity implements
     ArrayList<Location> listLocsToDraw = new ArrayList<Location>(); // arraylist of points to draw
     // only holds two locations at a time since we draw a line on the map whenever
     // we move from one point to another (no need to redraw everything)
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

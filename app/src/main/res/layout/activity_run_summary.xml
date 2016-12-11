@@ -32,30 +32,34 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/summaryAverageSpeedView"
                 android:textSize="20sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                fontPath="fonts/Vanilla.ttf"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/summaryTotalTimeView"
                 android:textSize="20sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                fontPath="fonts/Vanilla.ttf"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/summaryTotalDistanceView"
                 android:textSize="20sp"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                fontPath="fonts/Vanilla.ttf"/>
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Get Creatures!"
-            android:layout_marginLeft="60dp"
-            android:layout_gravity="center"
-            android:onClick="onClickGetCreatures"
-            />
-
     </LinearLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Creatures!"
+        android:layout_gravity="center"
+        android:onClick="onClickGetCreatures"
+        fontPath="fonts/Vanilla.ttf"
+        />
 
 </LinearLayout>

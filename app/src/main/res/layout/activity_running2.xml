@@ -33,21 +33,24 @@
                 android:text="Speed: 0 mph"
                 android:textColor="#ffffff"
                 android:id="@+id/speedView"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                fontPath="fonts/Vanilla.ttf"/>
             <TextView
                 android:layout_width="124dp"
                 android:layout_height="wrap_content"
                 android:text="Run time: 0:00:00"
                 android:textColor="#ffffff"
                 android:id="@+id/timeView"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                fontPath="fonts/Vanilla.ttf"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Distance: 0 miles"
                 android:textSize="20sp"
                 android:textColor="#ffffff"
-                android:id="@+id/distanceView"/>
+                android:id="@+id/distanceView"
+                fontPath="fonts/Vanilla.ttf"/>
         </LinearLayout>
 
         <Button
@@ -57,6 +60,7 @@
             android:layout_marginLeft="60dp"
             android:layout_gravity="center"
             android:onClick="onClickEndRun"
+            fontPath="fonts/Vanilla.ttf"
             />
 
     </LinearLayout>

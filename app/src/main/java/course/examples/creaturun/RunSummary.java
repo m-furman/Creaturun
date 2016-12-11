@@ -1,5 +1,6 @@
 package course.examples.creaturun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 /**
  * Displays a summery of the user's run.
  */
@@ -20,6 +23,11 @@ public class RunSummary extends AppCompatActivity {
     TextView totalDistanceView;
     TextView totalTimeView;
     TextView averageSpeedView;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

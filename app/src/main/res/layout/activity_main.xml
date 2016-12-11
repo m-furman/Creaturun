@@ -20,7 +20,8 @@
         android:gravity="center"
         android:id="@+id/textView"
         android:textIsSelectable="false"
-        android:textSize="50sp"
+        android:textSize="45sp"
+        fontPath="fonts/Vanilla.ttf"
         />
 
     <ImageView
@@ -40,7 +41,9 @@
         android:layout_gravity="center"
         android:id="@+id/startRunButton"
         android:onClick="onStartRun"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        fontPath="fonts/Vanilla.ttf"
+        />
 
     <Button
         android:text="View Creatures"
@@ -52,6 +55,7 @@
         android:layout_gravity="center"
         android:id="@+id/viewCreaturesButton"
         android:onClick="onViewCreatures"
-        android:textSize="22sp"/>
+        android:textSize="22sp"
+        fontPath="fonts/Vanilla.ttf"/>
 
 </LinearLayout>

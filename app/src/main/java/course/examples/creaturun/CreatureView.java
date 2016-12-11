@@ -1,15 +1,23 @@
 package course.examples.creaturun;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 // adapted from: https://developer.android.com/guide/topics/ui/layout/gridview.html
 public class CreatureView extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

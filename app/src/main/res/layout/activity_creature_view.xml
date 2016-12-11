@@ -19,7 +19,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onBack"
-        android:id="@+id/backButton" />
+        android:id="@+id/backButton"
+        fontPath="fonts/Vanilla.ttf"/>
 
     <GridView
         android:layout_width="match_parent"
