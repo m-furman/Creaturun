@@ -94,6 +94,7 @@ public class RunningActivity2 extends AppCompatActivity implements
     // we move from one point to another (no need to redraw everything)
 
     boolean paused;
+    double lastMovementSpeed;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -271,7 +272,7 @@ public class RunningActivity2 extends AppCompatActivity implements
 
         prevTime = currTime;
         distanceView.setText("Distance: " + new DecimalFormat("#.##").format(distance * 0.000621371) + " miles");
-        speedView.setText("Speed: " + String.valueOf(new DecimalFormat("#.##").format(movementSpeed)) + " mph");
+        speedView.setText("Speed: " + String.valueOf(new DecimalFormat("#.##").format((paused)? lastMovementSpeed : movementSpeed)) + " mph");
 
         // zoom to current position:
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -312,6 +313,7 @@ public class RunningActivity2 extends AppCompatActivity implements
     public void onClickPause(View v) {
         paused = !paused;
         Button pauseButton = (Button) findViewById(R.id.pauseButton);
+        lastMovementSpeed = movementSpeed;
 
         if (paused) {
             pauseButton.setText("Resume");
