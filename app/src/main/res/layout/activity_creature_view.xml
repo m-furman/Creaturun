@@ -20,6 +20,8 @@
         android:layout_alignParentStart="true"
         android:onClick="onBack"
         android:id="@+id/backButton"
+        android:textColor="#ffffff"
+        android:background="#FF1493"
         fontPath="fonts/Vanilla.ttf"/>
 
     <GridView
