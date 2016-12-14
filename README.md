@@ -29,7 +29,11 @@ Computer Science 2017
 
 ## How to run the program:
 
-Run the app on your device by clicking the "Run" button in Android Studio or by clicking on the app icon. 
+Run the app on your device by clicking the "Run" button in Android Studio or by clicking on the app icon. After the app launches, you will see two options 'Start Run' and 'View Creatures.' 
+
+'Start Run' will allow you to begin a run, and 'View Creatures' will allow you to see all of the creatures that you've collected on your previous runs. Upon starting a run, you will be able to see a map of your current location along with a creature marking your current position. As you move, your position on the map will change, and so will the position of the creature indicating your current location. The path that you've taken to run will be displayed by a bright blue line. The running screen also displays your current speed, your total run time, and the total distance you have traveled so far. You have the option to pause the run at any time, which pauses the timer and prevents any updates being made to speed and distance from being made. Once you have finished your run, you will be able to see the 'Run Summary' screen that displays relevant information about your work (average speed, total run time, total distance, and a map of your run). The 'Run Summary' screen also gives you the option of collecting your creatures, which you can do by dragging the key to the treasure chest. Each of the creatures that appears on this screen is responsive to touch, bringing up a pop-up dialog that gives you more information about the creature. 
+
+
 
 ## References:
 
