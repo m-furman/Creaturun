@@ -50,3 +50,6 @@ http://stackoverflow.com/questions/17012741/how-to-make-supportmapfragment-not-f
 Useful for figuring out how to send a bitmap from one activity to another:
 http://stackoverflow.com/questions/11010386/send-bitmap-using-intent-android
 
+Useful for figuring out how to hook up ImageView's to a GridView:
+https://developer.android.com/guide/topics/ui/layout/gridview.html
+
