@@ -1,7 +1,8 @@
 # Creaturun
 
+
 An innovative running application designed to to encourage people to run by "employing the psychology of collecting." In other words,
-the goal of this app is to encourage people to run for the same reason that people play Pokemon: **collecting**. :)
+the goal of this app is to encourage people to run for the same reason that people play Pokemon: **collecting**. 
 
 <p align = "center">
 <img src="http://drive.google.com/uc?export=view&id=1sItSNDAPFS6UDzjngmMZSsbup7TiRVuXgQ" width="240" height="430"  />
@@ -13,7 +14,17 @@ the goal of this app is to encourage people to run for the same reason that peop
 
 ## The team:
 
+Mark Newton
+Computer Science 2017
 
+Jon San Miguel
+Computer Science and Physics 2017
+
+Maria Furman
+Computer Science 2017
+
+Matthew Schleckser
+Computer Science 2017
 
 ## How to run the program:
 
